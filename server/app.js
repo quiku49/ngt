@@ -17,10 +17,25 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-app.get("/mastermind/:user", async(req, res) => {
-    const log = await existsUser(req.params.user);
+app.get("/user", async(req, res) => {
+    const log = await existsUser(req.query.user);
     res.status(200).send(log);
 })
+app.get("/login", async(req, res) => {
+    if(existsUser(req.query.user))
+    {
+        const log = await checkUser(req.query.user, req.query.pass);
+        res.status(200).send(log);
+    }
+    
+})
+//app.post()
+app.post("/register", async (req, res) => {
+    const { username, name, lastName, email, age, password } = req.body;
+    const savedUser = await saveUser(username, password, email, age, lastName, name);
+    res.status(200).send(savedUser);
+    
+});
 //put, delete, post
 app.listen(8080, () =>{
 

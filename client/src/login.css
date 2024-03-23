@@ -1,0 +1,25 @@
+/* register.css */
+
+.login-form {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.login-form button:hover {
+    background-color: #0056b3;
+}
