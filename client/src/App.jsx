@@ -4,26 +4,25 @@ import { BrowserRouter as Router, Routes, Link, Route } from "react-router-dom";
 import { Mastermind } from './mastermind'
 import { Login } from './login'
 import { Register } from './register'
+import { Home } from './home'
 import "../style.css";
 
 
-const Home = () => (
+const Main = () => (
   <React.Fragment>
     <h1>Bienvenido</h1>
-    <Link to="/mastermind">Ir a Otra Página</Link>
+    <Link to="/home">Ir a Otra Página</Link>
     <br />
     <Link to="/login">Login</Link>
     <br />
     <Link to="/register">Registro</Link>
   </React.Fragment>
 );
-
-const MasterMind = () => (
-  <React.Fragment>
-    <h1>Mastermind</h1>
-    <Mastermind />
-  </React.Fragment>
-);
+const HomePage = () => (
+    <React.Fragment>
+      <Home />
+    </React.Fragment>
+  )
 const LoginPage = () => (
   <React.Fragment>
     <Login />
@@ -34,15 +33,20 @@ const RegisterPage = () => (
     <Register />
   </React.Fragment>
 )
-
+const MasterMind = () => (
+  <React.Fragment>
+    <Mastermind />
+  </React.Fragment>
+)
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/mastermind" element={<MasterMind />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/mastermind" element={<MasterMind />} />
       </Routes>
     </Router>
   )

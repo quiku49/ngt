@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import './login.css'
 export const Login = () => {
     const [username, setUsername] = useState('');
@@ -6,10 +7,9 @@ export const Login = () => {
     const [error, setError] = useState('')
     const handleSubmit = async (event) => {
         event.preventDefault();
-        var response = await fetch(`http://192.168.1.110:8080/user?user=${username}`, {
+        var response= await fetch(`http://192.168.1.110:8080/user?user=${username}`, {
             method: "GET"
         })
-        
         var body = await response.json()
         if(body)
         {
@@ -17,8 +17,9 @@ export const Login = () => {
                 method: "GET"
             })
             body = await response.json()
-            if (body){
-                window.location.href = "/mastermind";
+            if (body.bool){
+                window.localStorage.setItem('userAuth', JSON.stringify(body))
+                window.location.href = "/home";
             }
         }
         else{

@@ -14,3 +14,11 @@ ESATDO DEL ARTE -
 DESARROLLO
 
 CONLUSIONES
+
+
+28/03/24
+situacion actual:   salas casi hechas
+                    joinroom no hace lo que tiene que hacer
+                    si refresco se pierde el estado del juego
+                    faltan premios, puntos, etc 
+                    

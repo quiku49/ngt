@@ -1,8 +1,8 @@
 import React from "react"
-
+import io from 'socket.io-client'
+import { useEffect } from "react";
 import { Board } from "./board";
 import { Reglas } from "./rules";
-
 export class Mastermind extends React.Component {
     constructor(props) {
         super(props)
@@ -18,7 +18,18 @@ export class Mastermind extends React.Component {
             combination: [],
             filas: [],
             intento: [],
-            turn: 0
+            turn: 0,
+            isLoading: true
+        }
+        this.socket = io("http://192.168.1.110:8080")
+    }
+    componentDidMount() {
+        const userAuth = JSON.parse(window.localStorage.getItem('userAuth'));
+        if (!userAuth || !userAuth.token) {
+            window.location.href = '/login'
+        }
+        else{
+            this.setState({ isLoading: false })
         }
     }
     //Pone color a los circulos del tablero principal
@@ -27,7 +38,7 @@ export class Mastermind extends React.Component {
         let filas = this.state.filas
         let pos = filas.findIndex(item => item.id === id)
         let combination = this.state.intento
-        console.log(filas)
+        
         if (this.state.activeFila == 0 && pos >= 150 && this.state.turn == 0) {
             filas[pos] = { id: id, color: color }
             combination[pos - 150] = { id: id, color: color }
@@ -55,6 +66,12 @@ export class Mastermind extends React.Component {
     activateColor(color) {
         this.setState({
             activeColor: color
+        }, () => {
+            this.socket.emit('movement', 
+                                    [this.state,
+                                    window.localStorage.getItem('userAuth'), 
+                                    window.localStorage.getItem('room')
+                                ])
         });
     }
 
@@ -64,6 +81,12 @@ export class Mastermind extends React.Component {
                 activeFila: this.state.activeFila + 1,
                 intento: [],
                 turn: 1
+            }, () => {
+                this.socket.emit('movement', 
+                                    [this.state,
+                                    window.localStorage.getItem('userAuth'), 
+                                    window.localStorage.getItem('room')
+                                ])
             });
         }
     }
@@ -72,7 +95,13 @@ export class Mastermind extends React.Component {
             this.setState({
                 intento: [],
                 turn: 2
-            });
+            }, () => {
+                this.socket.emit('movement', 
+                                    [this.state,
+                                    window.localStorage.getItem('userAuth'), 
+                                    window.localStorage.getItem('room')
+                                ])
+                });
         }
     }
     doneCorrection() {
@@ -81,6 +110,12 @@ export class Mastermind extends React.Component {
                 activeFila: this.state.activeFila + 1,
                 intento: [],
                 turn: 1
+            }, () => {
+                this.socket.emit('movement', 
+                                    [this.state,
+                                    window.localStorage.getItem('userAuth'), 
+                                    window.localStorage.getItem('room')
+                                ])
             });
         }
 
@@ -95,6 +130,27 @@ export class Mastermind extends React.Component {
         return true
     }
     render() {
+        if (this.state.isLoading) {
+            return null; // or return <LoadingScreen />;
+        }
+        this.socket.on("move", (data) => {
+            if(data.room != window.localStorage.getItem('room')){
+                
+            }
+            else{
+                this.setState({
+                    activeColor: data.activeColor,
+                    activeFila: data.activeFila,
+                    activeCircle: data.activeCircle,
+                    combination: data.combination,
+                    filas: data.filas,
+                    intento: data.intento,
+                    turn: data.turn,
+                    isLoading: true
+                });
+            }
+        })
+
         return (
             <div className="main">
                 <Reglas />
