@@ -17,8 +17,9 @@ CONLUSIONES
 
 
 28/03/24
-situacion actual:   salas casi hechas
-                    joinroom no hace lo que tiene que hacer
-                    si refresco se pierde el estado del juego
+situacion actual:   avisar cuando alguien entra en la sala(socket que actualiza el estado de LS room)
+                    poner arriba los participantes de la sala
+                    comprobar que los movimientos se envian a sus salas solo
+                    comprobar que se pueden jugar dos partidas a la vez
                     faltan premios, puntos, etc 
-                    
+

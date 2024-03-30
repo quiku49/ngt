@@ -68,17 +68,29 @@ io.on('connection', socket => {
         let roomid = createRoom()
         let room = {
             roomid: roomid,
-            player1: data,
-            player2: '' 
+            player1: data.token,
+            player1UserName: data.userName,
+            player2: '' ,
+            player2UserName: ''
         }
         rooms.push(room)
-        socket.emit('room', roomid)
+        socket.emit('room', room)
     })
     socket.on('joinRoom', (data) => {
         let room = rooms.find(room => room.roomid === data.room)
-        room.player2 = data.token
-        socket.emit('room', room.roomid)
-        console.log(rooms)
+        if (room){
+            if(room.player2 != '' && room.player2 != data.token){
+                socket.emit('room', 'full')
+                return
+            }
+            room.player2 = data.token
+            room.player2UserName = data.userName
+            socket.broadcast.emit('room', room)
+        }
+        else{
+            socket.emit('room', 'not found')
+        }
+        
     })
 })
 const createRoom = () => {

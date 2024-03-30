@@ -1,6 +1,6 @@
 import React from "react"
 import io from 'socket.io-client'
-import { useEffect } from "react";
+import { Logout } from "./logout";
 import { Board } from "./board";
 import { Reglas } from "./rules";
 export class Mastermind extends React.Component {
@@ -11,7 +11,8 @@ export class Mastermind extends React.Component {
         this.comboSet = this.comboSet.bind(this)
         this.correction = this.correction.bind(this)
         this.doneCorrection = this.doneCorrection.bind(this)
-        this.state = {
+        const savedState = JSON.parse(window.localStorage.getItem('mastermindState'));
+        this.state = savedState || {
             activeColor: '',
             activeFila: 0,
             activeCircle: 0,
@@ -22,6 +23,9 @@ export class Mastermind extends React.Component {
             isLoading: true
         }
         this.socket = io("http://192.168.1.110:8080")
+    }
+    componentDidUpdate() {
+        window.localStorage.setItem('mastermindState', JSON.stringify(this.state));
     }
     componentDidMount() {
         const userAuth = JSON.parse(window.localStorage.getItem('userAuth'));
@@ -66,13 +70,7 @@ export class Mastermind extends React.Component {
     activateColor(color) {
         this.setState({
             activeColor: color
-        }, () => {
-            this.socket.emit('movement', 
-                                    [this.state,
-                                    window.localStorage.getItem('userAuth'), 
-                                    window.localStorage.getItem('room')
-                                ])
-        });
+        }, () => {});
     }
 
     comboSet() {
@@ -83,10 +81,10 @@ export class Mastermind extends React.Component {
                 turn: 1
             }, () => {
                 this.socket.emit('movement', 
-                                    [this.state,
-                                    window.localStorage.getItem('userAuth'), 
-                                    window.localStorage.getItem('room')
-                                ])
+                                    {state: this.state,
+                                    userAuth: JSON.parse(window.localStorage.getItem('userAuth')), 
+                                    room: JSON.parse(window.localStorage.getItem('room'))
+                                 })
             });
         }
     }
@@ -97,10 +95,10 @@ export class Mastermind extends React.Component {
                 turn: 2
             }, () => {
                 this.socket.emit('movement', 
-                                    [this.state,
-                                    window.localStorage.getItem('userAuth'), 
-                                    window.localStorage.getItem('room')
-                                ])
+                                    {state: this.state,
+                                    userAuth: JSON.parse(window.localStorage.getItem('userAuth')), 
+                                    room: JSON.parse(window.localStorage.getItem('room'))
+                                 })
                 });
         }
     }
@@ -112,10 +110,10 @@ export class Mastermind extends React.Component {
                 turn: 1
             }, () => {
                 this.socket.emit('movement', 
-                                    [this.state,
-                                    window.localStorage.getItem('userAuth'), 
-                                    window.localStorage.getItem('room')
-                                ])
+                                    {state: this.state,
+                                    userAuth: JSON.parse(window.localStorage.getItem('userAuth')), 
+                                    room: JSON.parse(window.localStorage.getItem('room'))
+                                 })
             });
         }
 
@@ -133,33 +131,47 @@ export class Mastermind extends React.Component {
         if (this.state.isLoading) {
             return null; // or return <LoadingScreen />;
         }
+        this.socket.on('room', (room) => {
+            if(room.roomid == JSON.parse(window.localStorage.getItem('room')).roomid){
+                window.localStorage.setItem('room', JSON.stringify(room))
+                window.location.reload();
+            }
+        });
         this.socket.on("move", (data) => {
-            if(data.room != window.localStorage.getItem('room')){
-                
+            if(data.room.roomid != JSON.parse(window.localStorage.getItem('room')).roomid){
             }
             else{
                 this.setState({
-                    activeColor: data.activeColor,
-                    activeFila: data.activeFila,
-                    activeCircle: data.activeCircle,
-                    combination: data.combination,
-                    filas: data.filas,
-                    intento: data.intento,
-                    turn: data.turn,
-                    isLoading: true
-                });
+                    activeColor: data.state.activeColor,
+                    activeFila: data.state.activeFila,
+                    activeCircle: data.state.activeCircle,
+                    combination: data.state.combination,
+                    filas: data.state.filas,
+                    intento: data.state.intento,
+                    turn: data.state.turn
+                },() => {});
             }
         })
 
         return (
-            <div className="main">
-                <Reglas />
-                <Board state={this.state}
-                    colorCircle={this.setColor}
-                    actColor={this.activateColor}
-                    combination={this.comboSet}
-                    correct={this.correction}
-                    doneCorrect={this.doneCorrection} />
+            <div>
+                <h1>Mastermind</h1>
+                <h2>sala: {JSON.parse(window.localStorage.getItem('room')).roomid}</h2>
+                <div>
+                    <h3>Participantes:</h3>
+                    <h3>{JSON.parse(window.localStorage.getItem('room')).player1UserName}</h3>
+                    <h3>{JSON.parse(window.localStorage.getItem('room')).player2UserName}</h3>
+                </div>
+                <Logout />
+                <div className="main">
+                    <Reglas />
+                    <Board state={this.state}
+                        colorCircle={this.setColor}
+                        actColor={this.activateColor}
+                        combination={this.comboSet}
+                        correct={this.correction}
+                        doneCorrect={this.doneCorrection} />
+                </div>
             </div>
         )
     }

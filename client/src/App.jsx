@@ -5,6 +5,7 @@ import { Mastermind } from './mastermind'
 import { Login } from './login'
 import { Register } from './register'
 import { Home } from './home'
+import { Logout } from './logout'
 import "../style.css";
 
 
