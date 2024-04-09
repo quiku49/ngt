@@ -1,7 +1,6 @@
-d7301777e70ad1e9bb7cb6ba8ddb9b903783975c6bdf68f5eb57ce5e5e601811
-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-tfgAdminPass
+
 https://www.youtube.com/watch?v=YJ_XsBDc8mQ&t=917s&ab_channel=CodewithBetoenEspa%C3%B1ol tutorial fullstack
+https://getcssscan.com/css-buttons-examples botones
 
 TRABAJO ESCRITO
 
@@ -16,10 +15,14 @@ DESARROLLO
 CONLUSIONES
 
 
-28/03/24
-situacion actual:   avisar cuando alguien entra en la sala(socket que actualiza el estado de LS room)
-                    poner arriba los participantes de la sala
-                    comprobar que los movimientos se envian a sus salas solo
-                    comprobar que se pueden jugar dos partidas a la vez
+09/04/24
+                    Pantalla de seleccion de juego antes o despues de crear sala???(creo que despues)
+                    Avisos de no es tu turno, la corrección esta mal, etc
+                    logout button() + salir de sala button(no hace logout)
+                    estilo de participantes y sala
                     faltan premios, puntos, etc 
+                    perfiles
+                    amigos
+                    
+                    
 

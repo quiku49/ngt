@@ -1,4 +1,54 @@
 
+.participantes{
+  display: grid;
+  grid-template-columns: auto auto; 
+  grid-template-rows: auto auto;
+  column-gap: 30px;
+  border: 3px solid #020100;
+  padding: 10px;
+}
+.botones{
+  display: grid;
+  grid-template-columns: auto auto; 
+  gap: 85px;
+}
+.button-74 {
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: flex;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  height: 50px;
+  width: 100px;
+  
+}
+
+.button-74:hover {
+  background-color: #fff;
+}
+
+.button-74:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .button-74 {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}
 .main {
   border: solid;
   border-color: black;
@@ -80,11 +130,19 @@
 h1 {
   text-align: center;
 }
+.panelIzq{
+  display: grid;
+  width: 300px;
+  justify-items: center;
+  gap: 20px;
+}
 .panelderecho{
   display: grid;
   width: 300px;
   margin-left: 300px;
-  
+  align-items: center;
+  justify-items: center;
+
 }
 .combinacion {
   background-color: #3a2622;
@@ -150,4 +208,24 @@ h1 {
 .white{
   background-color: #ffffff;
   background-image: none;
+}
+.clear{
+  background-color: #3a2622;
+  background-image: url(http://www.transparenttextures.com/patterns/wood-pattern.png);
+  display: inline-block;
+}
+.connection {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: green;
+  border-radius: 50%;
+}
+
+.disconnection {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
 }

@@ -10,7 +10,7 @@ import {
 } from './database.js'
 
 const corsOptions = {
-    origin: ["http://192.168.1.110:5173","http://192.168.1.135"],
+    origin: ["http://"+process.env.LOCAL_IP+":5173"],
     methods: ["POST", "GET"],
     credentials: true
 }
@@ -60,7 +60,6 @@ app.post("/register", async (req, res) => {
 });
 
 io.on('connection', socket => {
-    console.log('client connected', socket.id)
     socket.on('movement', (data) =>{
         socket.broadcast.emit('move', data)
     })
@@ -79,18 +78,30 @@ io.on('connection', socket => {
     socket.on('joinRoom', (data) => {
         let room = rooms.find(room => room.roomid === data.room)
         if (room){
-            if(room.player2 != '' && room.player2 != data.token){
-                socket.emit('room', 'full')
-                return
+            if((room.player2 != '' && room.player2UserName != data.userName)){
+                if(room.player1UserName != data.userName)
+                {    socket.emit('room', 'full')
+                    return
+                }
             }
-            room.player2 = data.token
-            room.player2UserName = data.userName
+            if(room.player2 === ''){
+                room.player2 = data.token
+                room.player2UserName = data.userName
+            }
             socket.broadcast.emit('room', room)
+            socket.broadcast.emit('logIn', data.userName)
         }
         else{
             socket.emit('room', 'not found')
         }
         
+    })
+    socket.on('logOut', (data) => {
+        socket.broadcast.emit('logOut', data)
+    })
+    socket.on('turns', (data) => {
+        console.log('turns:', data)
+        socket.broadcast.emit('turns', data)
     })
 })
 const createRoom = () => {

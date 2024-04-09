@@ -4,8 +4,7 @@ import { BrowserRouter as Router, Routes, Link, Route } from "react-router-dom";
 import { Mastermind } from './mastermind'
 import { Login } from './login'
 import { Register } from './register'
-import { Home } from './home'
-import { Logout } from './logout'
+import { Home } from './home';
 import "../style.css";
 
 
@@ -20,10 +19,10 @@ const Main = () => (
   </React.Fragment>
 );
 const HomePage = () => (
-    <React.Fragment>
-      <Home />
-    </React.Fragment>
-  )
+  <React.Fragment>
+    <Home />
+  </React.Fragment>
+)
 const LoginPage = () => (
   <React.Fragment>
     <Login />

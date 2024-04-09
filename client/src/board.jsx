@@ -2,6 +2,17 @@
 import React from 'react'
 
 export class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isDoneClicked: false
+    };
+  }
+
+  handleDoneClick = () => {
+    this.props.combination();
+    this.setState({ isDoneClicked: true });
+  };
   render() {
 
     return (
@@ -10,25 +21,40 @@ export class Board extends React.Component {
         <Tablero state={this.props.state} colorCircle={this.props.colorCircle} type="secundaria" n={15} id={'s'} />
         <div className="panelderecho">
           <Tablero state={this.props.state} actColor={this.props.actColor} type="colors" n={2} id={'colors'} />
-          <button
-            onClick={() =>
-              this.props.correct()}
-          >
-            Check
-          </button>
-          <button
-            onClick={() =>
-              this.props.doneCorrect()}
-          >
-            Correct
-          </button>
-          <button
-            onClick={() =>
-              this.props.combination()}
-          >
-            Done
-          </button>
-          <Tablero state={this.props.state} colorCircle={this.props.colorCircle} type="combinacion" n={1} id={'c'} />
+
+          {this.props.state.turn1 === this.props.state.playerSelf && (
+            <button
+              className="button-74"
+              role="button"
+              onClick={() =>
+                this.props.correct()}>
+              Check
+            </button>
+          )}
+          {this.props.state.turn2 === this.props.state.playerSelf && (
+            <button
+              className="button-74"
+              role="button"
+              onClick={() =>
+                this.props.doneCorrect()}>
+              Correct
+            </button>
+          )}
+          {!this.state.isDoneClicked && this.props.state.turn0 === this.props.state.playerSelf && this.props.state.combination.length != 5 && (
+            <button
+              className="button-74"
+              role="button"
+              onClick={this.handleDoneClick}>
+              Done
+            </button>
+          )}
+          {
+            this.props.state.turn0 !== this.props.state.playerSelf ? (
+              <Tablero state={this.props.state} colorCircle={this.props.colorCircle} clear="clear" type="combinacion" n={1} id={'c'} />
+            ) : (
+              <Tablero state={this.props.state} colorCircle={this.props.colorCircle} clear="notclear" type="combinacion" n={1} id={'c'} />
+            )
+          }
         </div>
       </div>
     );
@@ -43,10 +69,13 @@ function Tablero(props) {
   if (props.type === "colors") {
     pal = 1;
   }
+
   for (let i = 0; i < props.n; i++) {
-    rows.push(<Row state={props.state} colorCircle={props.colorCircle} actColor={props.actColor} paleta={pal} row={i} id={props.id} />);
+    rows.push(<Row state={props.state} colorCircle={props.colorCircle} actColor={props.actColor} clear={props.clear} paleta={pal} row={i} id={props.id} />);
   }
+
   return <div className={props.type}>{rows}</div>;
+
 }
 
 class Row extends React.Component {
@@ -58,12 +87,12 @@ class Row extends React.Component {
     let circleid;
     if (this.props.paleta == 1) {
       if (this.props.row != 0) {
-        circles.push(<Circles state={this.props.state} actColor={this.props.actColor} clase={'circles ' + colors[5]} id={'colors'} />);
-        circles.push(<Circles state={this.props.state} actColor={this.props.actColor} clase={'circles ' + colors[6]} id={'colors'} />);
+        circles.push(<Circles state={this.props.state} actColor={this.props.actColor} clase={'circles ' + colors[5]} clear={this.props.clear} id={'colors'} />);
+        circles.push(<Circles state={this.props.state} actColor={this.props.actColor} clase={'circles ' + colors[6]} clear={this.props.clear} id={'colors'} />);
       }
       else {
         for (let i = 0; i < n; i++) {
-          circles.push(<Circles state={this.props.state} actColor={this.props.actColor} clase={'circles ' + colors[i + (this.props.row)]} id={'colors'} />);
+          circles.push(<Circles state={this.props.state} actColor={this.props.actColor} clear={this.props.clear} clase={'circles ' + colors[i + (this.props.row)]} id={'colors'} />);
         }
       }
 
@@ -74,7 +103,7 @@ class Row extends React.Component {
           circleid = { id: this.props.id + this.props.row + i, color: '' }
           this.props.state.filas.push(circleid)
         }
-        circles.push(<Circles state={this.props.state} colorCircle={this.props.colorCircle} clase={'circles'} id={this.props.id + this.props.row + i} />);
+        circles.push(<Circles state={this.props.state} colorCircle={this.props.colorCircle} clear={this.props.clear} clase={'circles'} id={this.props.id + this.props.row + i} />);
       }
     }
     return <div className="row">{circles}</div>;
@@ -122,6 +151,13 @@ class Circles extends React.Component {
       )
     }
     else if (id[0] === 'c') {
+      if (this.props.clear === "clear") {
+        return (
+          <span
+            className={'clear'}
+            id={this.props.id}>
+          </span>)
+      }
       return (
         <span
           className={this.props.clase + ' ' + color[0]}

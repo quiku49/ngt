@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useEffect } from 'react';
 import io from 'socket.io-client';
 import './home.css'
 import { Logout } from './logout';
-
+import { LOCAL_IP } from '../config';
 export const Home = () => {
     const [roomCode, setRoomCode] = useState('');
     const [isLoading, setIsLoading] = useState(true);
@@ -12,11 +12,11 @@ export const Home = () => {
         if (!userAuth || !userAuth.token) {
             window.location.href = '/login'
         }
-        else{
+        else {
             setIsLoading(false)
         }
     }, []);
-    const socket = io("http://192.168.1.110:8080")
+    const socket = io("http://" + LOCAL_IP + ":8080")
     socket.on('room', (data) => {
         if (data === 'full' || data === 'not found') {
             alert('room ' + data)
@@ -27,25 +27,25 @@ export const Home = () => {
     })
     const handleCreateRoom = () => {
         socket.emit('newRoom', {
-                                    token: JSON.parse(window.localStorage.getItem('userAuth')).token,
-                                    userName: JSON.parse(window.localStorage.getItem('userAuth')).user
-                                });
+            token: JSON.parse(window.localStorage.getItem('userAuth')).token,
+            userName: JSON.parse(window.localStorage.getItem('userAuth')).user
+        });
     };
 
     const handleJoinRoom = () => {
         socket.emit('joinRoom', {
-                token: JSON.parse(window.localStorage.getItem('userAuth')).token,
-                room: roomCode, 
-                userName: JSON.parse(window.localStorage.getItem('userAuth')).user
-            });
+            token: JSON.parse(window.localStorage.getItem('userAuth')).token,
+            room: roomCode,
+            userName: JSON.parse(window.localStorage.getItem('userAuth')).user
+        });
     };
     if (isLoading) {
         return
     }
-    else{
+    else {
         return (
             <div>
-                <h1>Welcome to the rooms application</h1>
+                <h1>Bienvenido a NGT</h1>
                 <button onClick={handleCreateRoom}>Create room</button>
                 <div>
                     <input

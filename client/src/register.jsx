@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './register.css';
+import { LOCAL_IP } from '../config';
 
 
 export const Register = () => {
@@ -14,9 +15,8 @@ export const Register = () => {
 
     const handleRegister = async (event) => {
         event.preventDefault();
-        if(password.trim() == confirmPassword.trim())
-        {
-            var response = await fetch(`http://192.168.1.110:8080/register`, {
+        if (password.trim() == confirmPassword.trim()) {
+            var response = await fetch(`http://` + LOCAL_IP + `:8080/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -31,21 +31,21 @@ export const Register = () => {
                 })
             })
             var body = await response.json()
-            if(body){
+            if (body) {
                 window.location.href = "/mastermind";
             }
-            else{
+            else {
                 setPassword('')
                 setConfirmPassword('')
                 setError("Error en el registro.")
             }
         }
-        else{
+        else {
             setPassword('')
             setConfirmPassword('')
             setError("Las contraseñas no coinciden.")
         }
-        
+
     };
     return (
         <div>
