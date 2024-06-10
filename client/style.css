@@ -1,16 +1,37 @@
 
+.topInfo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 800px;
+  margin-top: 0%;
+  position: absolute;
+  top: 1px;
+}
+.turn{
+  font-family: 'Arial', sans-serif;
+  color: #140086;
+  font-size: 3.5em;
+  text-align: right;
+  text-shadow: 0px 2px 4px #43647a;
+  font-size: 27px;
+
+}
 .participantes{
   display: grid;
   grid-template-columns: auto auto; 
   grid-template-rows: auto auto;
   column-gap: 30px;
   border: 3px solid #020100;
-  padding: 10px;
+  padding: 5px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 .botones{
   display: grid;
   grid-template-columns: auto auto; 
-  gap: 85px;
+  gap: 25px;
 }
 .button-74 {
   background-color: #fbeee0;
@@ -30,10 +51,24 @@
   -webkit-user-select: none;
   touch-action: manipulation;
   height: 50px;
-  width: 100px;
+  min-width: 100px;
   
 }
-
+h1 {
+  font-family: 'Arial', sans-serif;
+  color: #4a4a4a;
+  font-size: 3em;
+  text-align: center;
+  text-shadow: 2px 2px 4px #000000;
+}
+h2 {
+  font-family: 'Arial', sans-serif;
+  color: #383737;
+  font-size: 3.5em;
+  text-align: center;
+  text-shadow: 0px 2px 4px #3f3f3f;
+  font-size: 27px;
+}
 .button-74:hover {
   background-color: #fff;
 }
@@ -67,6 +102,7 @@
   border-color: black;
   display: inline-block;
 }
+
 .row {
   text-align: center;
   margin-top: 10px;
@@ -131,10 +167,8 @@ h1 {
   text-align: center;
 }
 .panelIzq{
-  display: grid;
   width: 300px;
   justify-items: center;
-  gap: 20px;
 }
 .panelderecho{
   display: grid;
@@ -174,12 +208,17 @@ h1 {
 }
 .colors .row {
   width: 260px;
+  padding-bottom: 60px;
 }
 .colors .circles {
   width: 30px;
   height: 30px;
-  margin-left: 8px;
-  margin-right: 8px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+.circles.selected {
+  width: 70px; /* Aumenta el ancho */
+  height: 70px; /* Aumenta la altura */
 }
 .red{
   background-color: red;

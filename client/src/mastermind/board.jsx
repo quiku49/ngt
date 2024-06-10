@@ -40,7 +40,7 @@ export class Board extends React.Component {
               Correct
             </button>
           )}
-          {!this.state.isDoneClicked && this.props.state.turn0 === this.props.state.playerSelf && this.props.state.combination.length != 5 && (
+          {this.props.state.turn0 === this.props.state.playerSelf && (
             <button
               className="button-74"
               role="button"
@@ -141,11 +141,12 @@ class Circles extends React.Component {
       let splitted = this.props.clase.split(" ")
       return (
         <span
-          className={this.props.clase}
+          className={splitted[1] === this.props.state.activeColor ? this.props.clase + ' selected' : this.props.clase}
           id={this.props.id}
           onClick={() =>
-            this.props.actColor(splitted[1])} >
-        </span>
+            this.props.actColor(splitted[1])
+          } >
+        </span >
 
 
       )

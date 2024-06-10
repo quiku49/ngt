@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './register.css';
-import { LOCAL_IP } from '../config';
+import { LOCAL_IP } from '../../config';
 
 
 export const Register = () => {
@@ -49,23 +49,23 @@ export const Register = () => {
     };
     return (
         <div>
-            <h1>Register</h1>
+            <h1>Registro</h1>
             <form onSubmit={handleRegister} className='register-form'>
-                <label><strong>Username:</strong></label>
+                <label><strong>Nombre de usuario:</strong></label>
                 <input
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                 />
                 <br />
-                <label><strong>Name:</strong></label>
+                <label><strong>Nombre:</strong></label>
                 <input
                     type="text"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                 />
                 <br />
-                <label><strong>Last Name:</strong></label>
+                <label><strong>Apellidos:</strong></label>
                 <input
                     type="text"
                     value={lastName}
@@ -79,28 +79,28 @@ export const Register = () => {
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <br />
-                <label><strong>Age:</strong></label>
+                <label><strong>Edad:</strong></label>
                 <input
                     type="text"
                     value={age}
                     onChange={(e) => setAge(e.target.value)}
                 />
                 <br />
-                <label><strong>Password:</strong></label>
+                <label><strong>Contraseña:</strong></label>
                 <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <br />
-                <label><strong>Confirm Password:</strong></label>
+                <label><strong>Confirmar Contraseña:</strong></label>
                 <input
                     type="password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                 />
                 <br />
-                <button type="submit">Register</button>
+                <button type="submit">Resgistarse</button>
                 {error && <div className="error">{error}</div>}
             </form>
         </div>

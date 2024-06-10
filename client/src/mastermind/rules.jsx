@@ -1,7 +1,7 @@
 export function Reglas() {
     return (
         <div className="reglas">
-            <h1>Como jugar:</h1>
+            <h1>Reglas:</h1>
             <div className="rulestext">
                 <p>
                     Mastermind es un juego de mesa, de ingenio y reflexión, para dos jugadores.
@@ -10,5 +10,5 @@ export function Reglas() {
                 </p>
             </div>
         </div>
-);
-  }
+    );
+}

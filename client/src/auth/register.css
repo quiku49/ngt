@@ -1,17 +1,22 @@
 /* register.css */
 
-.login-form {
+.register-form {
     width: 300px;
     margin: 0 auto;
 }
+.register-form input, .register-form button {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+}
 
-.login-form input {
+.register-form input {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
 }
 
-.login-form button {
+.register-form button {
     width: 100%;
     padding: 10px;
     background-color: #007bff;
@@ -20,6 +25,6 @@
     cursor: pointer;
 }
 
-.login-form button:hover {
+.register-form button:hover {
     background-color: #0056b3;
 }

@@ -6,7 +6,9 @@ import TokenGenerator from 'uuid-token-generator'
 import {
     checkUser,
     saveUser, 
-    existsUser
+    existsUser,
+    getFriends,
+    makeFriends
 } from './database.js'
 
 const corsOptions = {
@@ -51,11 +53,21 @@ app.get("/login", async(req, res) => {
     }
     
 })
+app.get("/friends", async(req, res) => {
+    const log = await getFriends(req.query.user);
+    res.status(200).send(log);
+})
 //app.post()
 app.post("/register", async (req, res) => {
     const { username, name, lastName, email, age, password } = req.body;
     const savedUser = await saveUser(username, password, email, age, lastName, name);
     res.status(200).send(savedUser);
+    
+});
+app.post("/makeFriend", async (req, res) => {
+    const { user, friend } = req.body;
+    const makeFriend = await makeFriends(user, friend);
+    res.status(200).send(makeFriend);
     
 });
 

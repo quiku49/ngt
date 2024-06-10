@@ -1,10 +1,10 @@
 import React from "react"
 import io from 'socket.io-client'
-import { Turns } from "./turns";
-import { Logout } from "./logout";
+import { Turns } from "../turns.jsx";
+import { Logout } from "../auth/logout.jsx";
 import { Board } from "./board";
-import { Reglas } from "./rules";
-import { LOCAL_IP } from '../config.js';
+import { Reglas } from "./rules.jsx";
+import { LOCAL_IP } from '../../config.js';
 
 export class Mastermind extends React.Component {
     constructor(props) {
@@ -72,7 +72,7 @@ export class Mastermind extends React.Component {
         let filas = this.state.filas
         let pos = filas.findIndex(item => item.id === id)
         let combination = this.state.intento
-        console.log(this.state.activeFila, pos, this.state.turn0, this.state.playerSelf)
+        //console.log(this.state.activeFila, pos, this.state.turn0, this.state.playerSelf)
         if (this.state.activeFila == 0 && pos >= 150 && this.state.turn0 == this.state.playerSelf) {
             filas[pos] = { id: id, color: color }
             combination[pos - 150] = { id: id, color: color }
@@ -236,20 +236,26 @@ export class Mastermind extends React.Component {
         return (
             <div>
                 <h1>Mastermind</h1>
-                <h2>sala: {this.state.roomid}
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    Turno: {this.state.turn === this.state.playerSelf ? "Es tu turno!!" : "Turno del rival..."}</h2>
+                <div className="topInfo">
+                    <div className="participantes">
+                        <h3>{this.state.player1} {this.state.player1 && <span className={this.state.player1Status === 1 ? "connection" : "disconnection"}></span>}</h3>
+                        <h3>{this.state.player2} {this.state.player2 && <span className={this.state.player2Status === 1 ? "connection" : "disconnection"}></span>}</h3>
+                        <h3>0 Points</h3>
+                        <h3>0 Points</h3>
+                    </div>
+
+                    <div className="botones">
+                        <Logout />
+                        <Turns />
+                    </div>
+                </div>
                 <div className="main">
                     <div className="panelIzq">
-                        <div className="participantes">
-                            <h3>{this.state.player1} {this.state.player1 && <span className={this.state.player1Status === 1 ? "connection" : "disconnection"}></span>}</h3>
-                            <h3>{this.state.player2} {this.state.player2 && <span className={this.state.player2Status === 1 ? "connection" : "disconnection"}></span>}</h3>
-                            <h3>0 Points</h3>
-                            <h3>0 Points</h3>
-                        </div>
-                        <div className="botones">
-                            <Logout />
-                            <Turns />
+                        <div className="inforoomturn">
+                            <h2>sala: {this.state.roomid}</h2>
+                            <h2 className="turn">
+                                {this.state.turn === this.state.playerSelf ? "Es tu turno!!" : "Turno del rival..."}
+                            </h2>
                         </div>
                         <Reglas />
                     </div>
