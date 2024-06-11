@@ -7,17 +7,13 @@ import { Register } from './auth/register'
 import { Home } from './home';
 import { MMHome } from './mastermind/mmhome'
 import { Friends } from './friends/friends';
+import { Ngt } from "./ngt";
 import "../style.css";
 
 
 const Main = () => (
   <React.Fragment>
-    <h1>Bienvenido</h1>
-    <Link to="/home">Ir a Otra Página</Link>
-    <br />
-    <Link to="/login">Login</Link>
-    <br />
-    <Link to="/register">Registro</Link>
+    <Ngt />
   </React.Fragment>
 );
 const HomePage = () => (
