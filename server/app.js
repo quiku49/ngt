@@ -12,7 +12,7 @@ import {
 } from './database.js'
 
 const corsOptions = {
-    origin: ["http://"+process.env.LOCAL_IP+":5173"],
+    origin: ["http://"+process.env.LOCAL_IP+":5173", "http://15.188.218.40"],
     methods: ["POST", "GET"],
     credentials: true
 }
