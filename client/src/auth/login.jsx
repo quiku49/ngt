@@ -8,12 +8,12 @@ export const Login = () => {
     const [error, setError] = useState('')
     const handleSubmit = async (event) => {
         event.preventDefault();
-        var response = await fetch(`http://` + LOCAL_IP + `:8080/api/user?user=${username}`, {
+        var response = await fetch(`http://` + LOCAL_IP + `/api/user?user=${username}`, {
             method: "GET"
         })
         var body = await response.json()
         if (body) {
-            response = await fetch(`http://` + LOCAL_IP + `:8080/api/login?user=${username}&pass=${password}`, {
+            response = await fetch(`http://` + LOCAL_IP + `/api/login?user=${username}&pass=${password}`, {
                 method: "GET"
             })
             body = await response.json()
