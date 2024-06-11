@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import '../style.css'
+import logo from './resources/logoNoBG.png'
 export const Ngt = () => {
     const [isLoading, setIsLoading] = useState(true);
     
@@ -9,7 +10,7 @@ export const Ngt = () => {
     
         return (
             <div>
-                <h1><img src="/resources/logoNoBG.png" alt="NGT" /></h1>
+                <h1><img src={logo} alt="NGT" /></h1>
                 <h2>Next Generation table</h2>
                 <div className='Description'>
                     <h3>NGT es una aplicación web diseñada especialmente para facilitar la conexión entre personas mayores y sus familiares a través de juegos de mesa clásicos.
