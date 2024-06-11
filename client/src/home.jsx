@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import './home.css'
 import '../style.css'
 import { Logout } from './auth/logout';
-import mastermind from './resources/MasterMind.jpg'
+import mastermind from '../resources/MasterMind.jpg'
 export const Home = () => {
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {

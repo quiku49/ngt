@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import '../style.css'
-import logo from './resources/logoNoBG.png'
+import logo from '../resources/logoNoBG.png'
 export const Ngt = () => {
     const [isLoading, setIsLoading] = useState(true);
     
