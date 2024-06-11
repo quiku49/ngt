@@ -20,7 +20,7 @@ export const Friends = () => {
     }, []);
     async function handleAddFriend() {
         const user = JSON.parse(window.localStorage.getItem('userAuth')).user;
-        const response = await fetch(`http://` + LOCAL_IP + `:8080/makeFriend`, {
+        const response = await fetch(`http://` + LOCAL_IP + `:8080/api/makeFriend`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -73,7 +73,7 @@ export const Friends = () => {
     }
 }
 async function fetchFriends(user) {
-    const response = await fetch(`http://` + LOCAL_IP + `:8080/friends?user=${user}`, {
+    const response = await fetch(`http://` + LOCAL_IP + `:8080/api/friends?user=${user}`, {
         method: "GET"
     })
     var body = await response.json()

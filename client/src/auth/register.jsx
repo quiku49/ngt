@@ -16,7 +16,7 @@ export const Register = () => {
     const handleRegister = async (event) => {
         event.preventDefault();
         if (password.trim() == confirmPassword.trim()) {
-            var response = await fetch(`http://` + LOCAL_IP + `:8080/register`, {
+            var response = await fetch(`http://` + LOCAL_IP + `:8080/api/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

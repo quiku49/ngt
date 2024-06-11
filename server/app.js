@@ -26,11 +26,11 @@ const io = new socketServer(server, {
     cors: corsOptions
   });
 
-app.get("/user", async(req, res) => {
+app.get("/api/user", async(req, res) => {
     const log = await existsUser(req.query.user);
     res.status(200).send(log);
 })
-app.get("/login", async(req, res) => {
+app.get("/api/login", async(req, res) => {
     if(existsUser(req.query.user))
     {
         var log = await checkUser(req.query.user, req.query.pass);
@@ -53,18 +53,18 @@ app.get("/login", async(req, res) => {
     }
     
 })
-app.get("/friends", async(req, res) => {
+app.get("/api/friends", async(req, res) => {
     const log = await getFriends(req.query.user);
     res.status(200).send(log);
 })
 //app.post()
-app.post("/register", async (req, res) => {
+app.post("/api/register", async (req, res) => {
     const { username, name, lastName, email, age, password } = req.body;
     const savedUser = await saveUser(username, password, email, age, lastName, name);
     res.status(200).send(savedUser);
     
 });
-app.post("/makeFriend", async (req, res) => {
+app.post("/api/makeFriend", async (req, res) => {
     const { user, friend } = req.body;
     const makeFriend = await makeFriends(user, friend);
     res.status(200).send(makeFriend);
