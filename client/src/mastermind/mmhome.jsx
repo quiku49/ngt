@@ -17,7 +17,7 @@ export const MMHome = () => {
             setIsLoading(false)
         }
     }, []);
-    const socket = io("http://" + LOCAL_IP + ":8080")
+    const socket = io("http://" + LOCAL_IP)
     socket.on('room', (data) => {
         if (data === 'full' || data === 'not found') {
             alert('room ' + data)

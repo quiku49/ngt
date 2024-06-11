@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 import { LOCAL_IP } from './config.js';
 
-const socket = io("http://" + LOCAL_IP + ":8080");
+const socket = io("http://" + LOCAL_IP );
 // Generate a unique room ID
 const roomId = Math.random().toString(36).substring(7);
 

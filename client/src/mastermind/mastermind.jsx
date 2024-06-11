@@ -35,7 +35,7 @@ export class Mastermind extends React.Component {
             turn2: '',
             turns: 0
         }
-        this.socket = io("http://" + LOCAL_IP + ":8080")
+        this.socket = io("http://" + LOCAL_IP)
         this.roomid = ''
         this.player1 = ''
         this.player2 = ''

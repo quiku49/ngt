@@ -2,7 +2,7 @@ import io from "socket.io-client";
 import { LOCAL_IP } from "../../config.js";
 
 export const Logout = () => {
-    const socket = io("http://" + LOCAL_IP + ":8080")
+    const socket = io("http://" + LOCAL_IP)
     const handleLogout = () => {
         socket.emit('logOut', {
             room: JSON.parse(window.localStorage.getItem('room'))?.roomid,
