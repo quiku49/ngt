@@ -38,7 +38,7 @@ p {
     padding: 10px;
     gap: 20px;
 }
-img{
+.imgMM{
     width: 250px;
     height: 200px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -47,6 +47,6 @@ img{
     border-radius: 20px;
 }
 
-img:hover {
+.imgMM:hover {
     transform: scale(1.05);
 }

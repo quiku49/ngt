@@ -28,7 +28,7 @@ export const Home = () => {
                     <div className="games">
 
                         <a href="/mmhome">
-                            <img src="./resources/MasterMind.jpg" alt="MasterMind" />
+                            <img className="imgMM" src="./resources/MasterMind.jpg" alt="MasterMind" /> <br />
                         </a>
 
                     </div>

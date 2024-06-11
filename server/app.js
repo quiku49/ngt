@@ -12,7 +12,9 @@ import {
 } from './database.js'
 
 const corsOptions = {
-    origin: ["http://"+process.env.LOCAL_IP+":5173", "http://15.188.218.40", "http://localhost:8080"],
+    origin: ["http://"+process.env.LOCAL_IP+":5173", "http://15.188.218.40", 
+             "http://localhost:8080", "http://"+process.env.LOCAL_IP+":8080",
+             "http://nextgentable.es", "http://www.nextgentable.es", "http://localhost:5173"],
     methods: ["POST", "GET"],
     credentials: true
 }

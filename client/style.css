@@ -69,6 +69,16 @@ h2 {
   text-shadow: 0px 2px 4px #3f3f3f;
   font-size: 27px;
 }
+h3{
+  
+  font-family: 'Arial', sans-serif;
+  color: #383737;
+  text-align: center;
+  font-size: 17px;
+  width: 900px;
+  
+
+}
 .button-74:hover {
   background-color: #fff;
 }
@@ -269,9 +279,26 @@ h1 {
   border-radius: 50%;
 }
 
-.Descriptio{
+.Description{
   display: grid;
-  grid-template-columns: auto auto; 
-  gap: 25px;
-  margin-left: 300px;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  gap: 10px;
+}
+.Description button {
+  width: 350px;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+
+}
+
+.Description button:hover {
+  background-color: #0056b3;
 }
