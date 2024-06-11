@@ -22,7 +22,7 @@ var rooms = []
 const app = express()
 
 app.use(express.json())
-app.use(cors())
+app.use(cors(corsOptions))
 const server = http.createServer(app)
 const io = new socketServer(server, {
     cors: corsOptions
