@@ -1,1 +1,1 @@
-export const LOCAL_IP = "192.168.0.13";
+export const LOCAL_IP = "172.31.36.182";
