@@ -11,7 +11,7 @@ export class Board extends React.Component {
 
   handleDoneClick = () => {
     this.props.combination();
-    this.setState({ isDoneClicked: true });
+    
   };
   render() {
 
@@ -22,35 +22,45 @@ export class Board extends React.Component {
         <div className="panelderecho">
           <Tablero state={this.props.state} actColor={this.props.actColor} type="colors" n={2} id={'colors'} />
 
-          {this.props.state.turn1 === this.props.state.playerSelf && (
+          {this.props.state.turn1 === this.props.state.playerSelf ? (
+            <>
+            <p>Pulse este botón cuando quiera comprobar su intento</p>
             <button
               className="button-74"
               role="button"
               onClick={() =>
                 this.props.correct()}>
-              Check
+              Enviar intento
             </button>
-          )}
-          {this.props.state.turn2 === this.props.state.playerSelf && (
+            </>
+          ) : ''}
+          {this.props.state.turn2 === this.props.state.playerSelf ? (
+            <>
+            <p>Pulse este botón para enviar la correccióna su rival</p>
             <button
               className="button-74"
               role="button"
               onClick={() =>
                 this.props.doneCorrect()}>
-              Correct
+              Enviar Corrección
             </button>
-          )}
-          {this.props.state.turn0 === this.props.state.playerSelf && (
-            <button
-              className="button-74"
-              role="button"
-              onClick={this.handleDoneClick}>
-              Done
+            </>
+          ) : ''}
+          { this.props.state.comboSet === 1 ? '' : (this.props.state.turn0 === this.props.state.playerSelf ? (
+            <><div>
+              <p>Pulse este botón cuando haya termiando de colocar la combinación:</p>
+              <button
+                className="button-74"
+                role="button"
+                onClick={this.handleDoneClick}>
+                Establecer Combinación
             </button>
-          )}
+            </div>
+            </>) : '')
+            }
           {
             this.props.state.turn0 !== this.props.state.playerSelf ? (
-              <Tablero state={this.props.state} colorCircle={this.props.colorCircle} clear="clear" type="combinacion" n={1} id={'c'} />
+              <Tablero state={this.props.state} colorCircle={this.props.colorCircle} clear={this.props.state.endOfGame === 1 ? "notclear" : "clear"} type="combinacion" n={1} id={'c'} />
             ) : (
               <Tablero state={this.props.state} colorCircle={this.props.colorCircle} clear="notclear" type="combinacion" n={1} id={'c'} />
             )

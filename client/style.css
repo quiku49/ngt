@@ -357,3 +357,28 @@ h1 {
   position: absolute;
   top: 220px;
 }
+.victory {
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    z-index: 9999; 
+    width: 600px;
+    height: 400px;
+    background-color: #ffffff;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-color: #000000;
+    border-style: solid;
+  }
+  .victory p{
+    font-size: 30px;
+    font-weight: bold;
+  }
+  .victory img{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }

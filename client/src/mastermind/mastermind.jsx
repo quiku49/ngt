@@ -5,6 +5,7 @@ import { Logout } from "../auth/logout.jsx";
 import { Board } from "./board";
 import { Reglas } from "./rules.jsx";
 import { LOCAL_IP } from '../../config.js';
+import victory from '../../resources/victoria.gif'
 
 export class Mastermind extends React.Component {
     constructor(props) {
@@ -35,7 +36,9 @@ export class Mastermind extends React.Component {
             turn2: '',
             turns: 0,
             pointsPlayer1: '',
-            pointsPlayer2: ''
+            pointsPlayer2: '',
+            comboSet: 0,
+            endOfGame: 0
         }
         this.socket = io("http://" + LOCAL_IP)
         this.roomid = ''
@@ -104,14 +107,15 @@ export class Mastermind extends React.Component {
             activeColor: color
         }, () => { });
     }
-
+    //Establece la combinación
     comboSet() {
         if (this.checkIntento(this.state.intento) && this.state.turn0 == this.state.playerSelf) {
             this.setState({
                 activeFila: this.state.activeFila + 1,
                 intento: [],
                 turn: this.state.turn1,
-                activateColor: ''
+                activeColor: '',
+                comboSet: 1
             }, () => {
                 this.socket.emit('movement',
                     {
@@ -122,12 +126,15 @@ export class Mastermind extends React.Component {
             });
         }
     }
+    //Corrige el intento
     correction() {
         if (this.checkIntento(this.state.intento) && this.state.turn == this.state.playerSelf) {
             this.setState({
                 intento: [],
                 turn: this.state.turn2,
-                activateColor: ''
+                activeColor: '',
+                pointsPlayer1: this.state.pointsPlayer1 -1,
+                pointsPlayer2: this.state.pointsPlayer2 +1
             }, () => {
                 this.socket.emit('movement',
                     {
@@ -138,13 +145,15 @@ export class Mastermind extends React.Component {
             });
         }
     }
+    //Envia la corrección
     doneCorrection() {
+        this.endOfGame()
         if (this.state.turn == this.state.playerSelf) {
             this.setState({
                 activeFila: this.state.activeFila + 1,
                 intento: [],
                 turn: this.state.turn1,
-                activateColor: ''
+                activeColor: ''
             }, () => {
                 this.socket.emit('movement',
                     {
@@ -155,6 +164,20 @@ export class Mastermind extends React.Component {
             });
         }
 
+    }
+    endOfGame() {
+        let intento = this.state.intento
+        for (let i = 0; i < 5; i++) {
+            if (intento[i].color != 'black'){
+                return false
+            }
+        }
+        this.setState({
+            endOfGame: 1,
+            pointsPlayer1: this.state.pointsPlayer1 + 5,
+
+        })
+        return true
     }
     checkIntento(intento) {
         for (let i = 0; i < 5; i++) {
@@ -189,7 +212,11 @@ export class Mastermind extends React.Component {
                     combination: data.state.combination,
                     filas: data.state.filas,
                     intento: data.state.intento,
-                    turn: data.state.turn
+                    turn: data.state.turn,
+                    pointsPlayer1: data.state.pointsPlayer1,
+                    pointsPlayer2: data.state.pointsPlayer2,
+                    comboSet: data.state.comboSet,
+                    endOfGame: data.state.endOfGame
                 }, () => { });
             }
         })
@@ -253,9 +280,7 @@ export class Mastermind extends React.Component {
                         <br />
                         <div style={{display:'flex'}}>
                             {this.state.turn0 != '' ? '' : 
-                                <p>Sortear los turnos de la partida:
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                                &&<Turns />}
+                                <><p>Sortear los turnos de la partida:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><Turns /></>}
                             
                         </div>
                     </div>
@@ -271,7 +296,15 @@ export class Mastermind extends React.Component {
                         </div>
                         <Reglas />
                     </div>
-
+                    {this.state.endOfGame === 0 ? '' : (
+                        <>
+                        <div className="victory">
+                            <p>Victoria!!</p>
+                            <img src={victory} alt="" />
+                            <p>{this.state.player1} ha ganado: {this.state.pointsPlayer1} puntos</p>
+                            <p>{this.state.player2} ha ganado: {this.state.pointsPlayer2} puntos</p>
+                        </div>
+                        </>)}
 
                     <Board state={this.state}
                         colorCircle={this.setColor}
