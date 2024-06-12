@@ -8,10 +8,10 @@ export const Logout = () => {
             room: JSON.parse(window.localStorage.getItem('room'))?.roomid,
             userName: JSON.parse(window.localStorage.getItem('userAuth'))?.user
         });
-        window.localStorage.removeItem('userAuth');
-        window.localStorage.removeItem('room');
-        window.localStorage.removeItem('mastermindState');
         window.location.href = '/';
+        window.localStorage.clear();
+        window.localStorage.removeItem('MastermindState');
+        
     };
 
     return (

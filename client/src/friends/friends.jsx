@@ -3,6 +3,7 @@ import { LOCAL_IP } from '../../config';
 import { Logout } from '../auth/logout';
 import { Link } from 'react-router-dom';
 import './friends.css';
+import { Footer } from '../footer';
 
 export const Friends = () => {
     const [friends, setFriends] = useState([]);
@@ -133,7 +134,7 @@ export const Friends = () => {
                         ))}
                     </ul>
                 </div>
-
+                <Footer />
             </div >
         );
     }

@@ -33,7 +33,9 @@ export class Mastermind extends React.Component {
             turn0: '',
             turn1: '',
             turn2: '',
-            turns: 0
+            turns: 0,
+            pointsPlayer1: '',
+            pointsPlayer2: ''
         }
         this.socket = io("http://" + LOCAL_IP)
         this.roomid = ''
@@ -225,8 +227,10 @@ export class Mastermind extends React.Component {
                     turn0: t2,
                     turn1: t1,
                     turn2: t2,
-                    turn: t1,
-                    turns: 1
+                    turn: t2,
+                    turns: 1,
+                    pointsPlayer1: this.state.player1 === t1 ? 15 : 0,
+                    pointsPlayer2: this.state.player2 === t1 ? 15 : 0
                 }, () => { });
             }
         });
@@ -235,26 +239,34 @@ export class Mastermind extends React.Component {
 
         return (
             <div>
-                <h1>Mastermind</h1>
-                <div className="topInfo">
+                
+                <div className="top">
                     <div className="participantes">
                         <h3>{this.state.player1} {this.state.player1 && <span className={this.state.player1Status === 1 ? "connection" : "disconnection"}></span>}</h3>
                         <h3>{this.state.player2} {this.state.player2 && <span className={this.state.player2Status === 1 ? "connection" : "disconnection"}></span>}</h3>
-                        <h3>0 Points</h3>
-                        <h3>0 Points</h3>
+                        <h3>{this.state.pointsPlayer1 === '' ? '' : this.state.pointsPlayer1 + " puntos"}</h3>
+                        <h3>{this.state.pointsPlayer2 === '' ? '' : this.state.pointsPlayer2 + " puntos"}</h3>
                     </div>
-
-                    <div className="botones">
+                    <h1>Mastermind</h1>
+                    <div className="topButtons">
                         <Logout />
-                        <Turns />
+                        <br />
+                        <div style={{display:'flex'}}>
+                            {this.state.turn0 != '' ? '' : 
+                                <p>Sortear los turnos de la partida:
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                &&<Turns />}
+                            
+                        </div>
                     </div>
                 </div>
                 <div className="main">
                     <div className="panelIzq">
+                    <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        sala: {this.state.roomid}</h2>
                         <div className="inforoomturn">
-                            <h2>sala: {this.state.roomid}</h2>
                             <h2 className="turn">
-                                {this.state.turn === this.state.playerSelf ? "Es tu turno!!" : "Turno del rival..."}
+                                {this.state.turn === '' ? 'Deben sortear los turnos para comenzar' : this.state.turn === this.state.playerSelf ? "Es tu turno!!" : "Turno del rival..."}
                             </h2>
                         </div>
                         <Reglas />

@@ -12,7 +12,7 @@ export const Turns = () => {
             className="button-74"
             role="button"
             onClick={handleTurns}>
-            Turns
+            Turnos
         </button>
     );
 };

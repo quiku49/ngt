@@ -27,6 +27,8 @@
   padding: 5px;
   padding-top: 0;
   padding-bottom: 0;
+  width: 250px;
+  margin-left: 200px;
 }
 .botones{
   display: grid;
@@ -164,6 +166,7 @@ h2 {
 }
 
 .reglas {
+  margin-top: 90px;
   width: 300px;
   margin-left: 50px;
 }
@@ -349,4 +352,8 @@ h1 {
 .topButtons{
   display: grid;
   width: 100%;
+}
+.inforoomturn{
+  position: absolute;
+  top: 220px;
 }
