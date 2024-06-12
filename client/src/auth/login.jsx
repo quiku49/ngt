@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { Link } from 'react-router-dom';
 import './login.css'
 import { LOCAL_IP } from '../../config';
 export const Login = () => {
@@ -29,10 +29,13 @@ export const Login = () => {
             setError("Usuario o contraseña incorrectos.")
         }
     }
-
     return (
         <div>
-            <h1>Login</h1>
+            <div className='top'>
+                <Link className='link' to="/"><button> Volver al inicio </button></Link>
+                <h1>Login</h1>
+            </div>
+            <br /><br /><br /><br /><br /><br /><br /><br />
             <form className='login-form' onSubmit={handleSubmit}>
                 <div>
                     <label><strong>Nombre de Usuario:  </strong></label>
@@ -48,7 +51,10 @@ export const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         name="password" />
                 </div>
+                <br /><br />
                 <button type="submit"> Iniciar Sesión </button>
+                <br /><br />
+                <Link to="/register"><button>Registrarse</button></Link>
                 {error && <div className="error">{error}</div>}
             </form>
         </div>

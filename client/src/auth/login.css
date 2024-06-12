@@ -27,3 +27,25 @@
 .login-form button:hover {
     background-color: #0056b3;
 }
+.top {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    
+}
+.top button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    height: 50px;
+    width: 180px;
+    justify-self: center;
+    font-size: large;
+}
+.top button:hover {
+    background-color: #0056b3;
+}
+.top .link {
+    justify-self: center;
+}
