@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './login.css'
 import { LOCAL_IP } from '../../config';
+import { Footer } from '../footer';
 export const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -54,9 +55,11 @@ export const Login = () => {
                 <br /><br />
                 <button type="submit"> Iniciar Sesión </button>
                 <br /><br />
-                <Link to="/register"><button>Registrarse</button></Link>
+                <p>¿No tiene cuenta?</p>
+                <Link to="/register"><button>Crear cuenta nueva</button></Link>
                 {error && <div className="error">{error}</div>}
             </form>
+            <Footer />
         </div>
     )
 }

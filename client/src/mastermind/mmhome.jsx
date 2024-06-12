@@ -5,6 +5,8 @@ import './mmhome.css'
 import '../../style.css'
 import { Logout } from '../auth/logout';
 import { LOCAL_IP } from '../../config';
+import { Footer } from '../footer';
+import { Link } from 'react-router-dom';
 export const MMHome = () => {
     const [roomCode, setRoomCode] = useState('');
     const [isLoading, setIsLoading] = useState(true);
@@ -49,21 +51,49 @@ export const MMHome = () => {
     else {
         return (
             <div>
-                <h1>Bienvenido a MasterMind</h1>
-                <div className='mmhome'>
-                    <button
-                        className="button-74"
-                        role="button"
-                        onClick={handleFriends}>
-                        Ver amigos
-                    </button>
+                <div className='top'>
+                    <div className='topButtons'>
+                        <button
+                            className="button-74"
+                            role="button"
+                            onClick={handleFriends}>
+                            Amigos
+                        </button>
+                        <br />
+                        <Link className='link' to="/home">
+                        <button
+                            className="button-74"
+                            role="button">
+                            Premios
+                        </button>
+                    </Link>
+                    </div>
+                    <h1>Bienvenido a MasterMind</h1>
+                    <div className='topButtons'>
+                        <Link className='link' to="/home">
+                            <button
+                                className="button-74"
+                                role="button">
+                                Volver a inicio
+                            </button>
+                        </Link>
+                        <br />
+                        <Logout />
+                    </div>
+                    
+                </div>
+                <br /><br /><br /><br /><br /><br /><br /><br />
+                <div className='mmhome'>   
+                    <h3>Pulsa este botón para inciar una partida nueva:</h3>               
                     <button
                         className="button-74"
                         role="button"
                         onClick={handleCreateRoom}>
-                        Crear Sala
+                        Crear Sala Nueva
                     </button>
+                    
                     <div className='inputRoomCode'>
+                        <h3>Introduce un código de sala para unirte a la partida:</h3>
                         <input
                             className='inputMM'
                             type="text"
@@ -78,8 +108,8 @@ export const MMHome = () => {
                             Unirse a Sala
                         </button>
                     </div>
-                    <Logout />
                 </div>
+                <Footer />
             </div>
         );
     }

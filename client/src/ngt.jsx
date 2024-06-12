@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import '../style.css'
 import logo from '../resources/logoNoBG.png'
+import { Footer } from './footer';
 export const Ngt = () => {
     const [isLoading, setIsLoading] = useState(true);
     
@@ -25,6 +26,7 @@ export const Ngt = () => {
                     <Link to="/login"><button>Iniciar sesión</button></Link>
                     <Link to="/register"><button>Registrarse</button></Link>
                 </div>
+                <Footer />
             </div>
         );
     }

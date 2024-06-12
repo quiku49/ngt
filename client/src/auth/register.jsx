@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import './register.css';
 import { LOCAL_IP } from '../../config';
+import { Link } from 'react-router-dom';
+import { Footer } from "../footer";
 
 
 export const Register = () => {
@@ -49,13 +51,18 @@ export const Register = () => {
     };
     return (
         <div>
-            <h1>Registro</h1>
+            <div className='top'>
+                <Link className='link' to="/"><button> Volver al inicio </button></Link>
+                <h1>Registro</h1>
+            </div>
+            
             <form onSubmit={handleRegister} className='register-form'>
                 <label><strong>Nombre de usuario:</strong></label>
                 <input
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
+                    required
                 />
                 <br />
                 <label><strong>Nombre:</strong></label>
@@ -63,6 +70,7 @@ export const Register = () => {
                     type="text"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
+                    required
                 />
                 <br />
                 <label><strong>Apellidos:</strong></label>
@@ -70,6 +78,7 @@ export const Register = () => {
                     type="text"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
+                    required
                 />
                 <br />
                 <label><strong>Email:</strong></label>
@@ -77,6 +86,7 @@ export const Register = () => {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    required
                 />
                 <br />
                 <label><strong>Edad:</strong></label>
@@ -84,6 +94,7 @@ export const Register = () => {
                     type="text"
                     value={age}
                     onChange={(e) => setAge(e.target.value)}
+                    required
                 />
                 <br />
                 <label><strong>Contraseña:</strong></label>
@@ -91,6 +102,7 @@ export const Register = () => {
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    required
                 />
                 <br />
                 <label><strong>Confirmar Contraseña:</strong></label>
@@ -98,11 +110,16 @@ export const Register = () => {
                     type="password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
                 />
                 <br />
-                <button type="submit">Resgistarse</button>
+                <button type="submit">Resgistrarse</button>
+                <br /><br />
+                <p>¿Ya tiene cuenta?</p>
+                <Link to="/login"><button>Iniciar sesión</button></Link>
                 {error && <div className="error">{error}</div>}
             </form>
+            <Footer />
         </div>
     );
 };
