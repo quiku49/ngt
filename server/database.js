@@ -100,3 +100,24 @@ export async function makeFriends(user, friend){
     console.log("no se pudo hacer amigo")
     return false
 }
+export async function deleteFriends(user, friend){
+    if(await existsUser(user) && await existsUser(friend) && await friends(user, friend))
+    {
+        try {
+            const [row] = await con.query(
+                'DELETE FROM friends WHERE user=? AND friend=?;',
+                [user.trim(), friend.trim(), 1]
+            )
+            const [row2] = await con.query(
+                'DELETE FROM friends WHERE user=? AND friend=?;',
+                [friend.trim(), user.trim(), 1]
+            )
+        } catch (error) {
+            console.log(error)
+            return false
+        }
+        return true
+    }
+    console.log("no se pudo eliminar amigo")
+    return false
+}

@@ -8,7 +8,8 @@ import {
     saveUser, 
     existsUser,
     getFriends,
-    makeFriends
+    makeFriends,
+    deleteFriends
 } from './database.js'
 
 const corsOptions = {
@@ -70,6 +71,12 @@ app.post("/api/makeFriend", async (req, res) => {
     const { user, friend } = req.body;
     const makeFriend = await makeFriends(user, friend);
     res.status(200).send(makeFriend);
+    
+});
+app.post("/api/deleteFriend", async (req, res) => {
+    const { user, friend } = req.body;
+    const deleteFriend = await deleteFriends(user, friend);
+    res.status(200).send(deleteFriend);
     
 });
 

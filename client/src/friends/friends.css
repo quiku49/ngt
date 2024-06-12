@@ -1,1 +1,57 @@
-
+.friend p{
+    font-size: 19px;
+}
+.friend button{
+    background-color: #fbeee0;
+    border: 2px solid #422800;
+    border-radius: 30px;
+    box-shadow: #422800 4px 4px 0 0;
+    color: #422800;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 0 18px;
+    line-height: 50px;
+    text-align: center;
+    height: 50px;
+    min-width: 100px;
+    margin-left: 15px;
+}
+.friend button:hover {
+    background-color: #fff;
+}
+.friendstext{
+    display: grid;
+    justify-content: center;
+}
+.inputFriend{
+    background-color: #fbeee0;
+    border: 2px solid #422800;
+    border-radius: 30px;
+    box-shadow: #422800 4px 4px 0 0;
+    color: #422800;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 0 18px;
+    line-height: 50px;
+    text-align: center;
+    height: 50px;
+    min-width: 500px;
+}
+.friendButton{
+    background-color: #fbeee0;
+    border: 2px solid #422800;
+    border-radius: 30px;
+    box-shadow: #422800 4px 4px 0 0;
+    color: #422800;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 0 18px;
+    line-height: 50px;
+    text-align: center;
+    height: 50px;
+    min-width: 100px;
+    margin-left: 15px;
+}
+.friendButton:hover {
+    background-color: #fff;
+}

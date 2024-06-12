@@ -47,14 +47,6 @@ export const Home = () => {
                     </div>
                     <h1>Bienvenido a NGT</h1>
                     <div className='topButtons'>
-                        <Link className='link' to="/home">
-                            <button
-                                className="button-74"
-                                role="button">
-                                Volver a inicio
-                            </button>
-                        </Link>
-                        <br />
                         <Logout />
                     </div>
                 </div>
