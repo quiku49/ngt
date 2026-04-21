@@ -1,6 +1,7 @@
 import mysql from 'mysql2'
 import dotenv from 'dotenv'
 import crypto from 'crypto'
+import bcrypt from 'bcrypt'
 
 
 dotenv.config();
@@ -17,13 +18,12 @@ const con = mysql
 export async function checkUser(user, pass) {
     if(await existsUser(user))
     {
-        const hash  = crypto.createHash('sha256')
         const [row] = await con.query(
-            'SELECT * FROM users WHERE username = ? AND password = ?;',
-            [user.trim(), hash.update(pass.trim()).digest('Hex')]
+            'SELECT password FROM users WHERE username = ?;',
+            [user.trim()]
         )
         if (row.length >= 1)
-            return true;
+            return await bcrypt.compare(pass.trim(), row[0].password);
     }
     return false;
 }
@@ -42,10 +42,10 @@ export async function saveUser(user, pass, email, age, lastname, name) {
 
     if(await existsUser(user) == false)
     {
-        const hash  = crypto.createHash('sha256')
+        const hashedPassword = await bcrypt.hash(pass.trim(), 12)
         const [row] = await con.query(
             'INSERT INTO users(username,password,name,lastname,age,email) VALUES (?,?,?,?,?,?);',
-            [user.trim(), hash.update(pass.trim()).digest('Hex'), name, lastname, age, email]
+            [user.trim(), hashedPassword, name, lastname, age, email]
         )
         console.log("creado usuario", user)
         return true
